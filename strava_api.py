@@ -28,20 +28,20 @@ headers = {
     "Authorization": f"Bearer {get_access_token()}"
 }
 
-# Lines 26-30: Parameters for the request
+
 params = {
     "per_page": 5,
     "page": 1
 }
 
-# Line 34: The actual API call
+
 response = requests.get(endpoint, headers=headers, params=params)
 
-# Line 37: Error Handling
+
 if not response.ok:
     print(f"API returned {response.status_code}: {response.text}")
 response.raise_for_status()
 
-# Line 40: Data Extraction
+
 activities = response.json()
 print(json.dumps(activities, indent=2))
