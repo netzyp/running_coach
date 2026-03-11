@@ -1,6 +1,5 @@
 import os
 import requests
-import json
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 
@@ -22,26 +21,24 @@ def get_access_token():
     response.raise_for_status()
     return response.json()['access_token']
 
-endpoint = f"{BASE_URL}/athlete/activities"
-
-headers = {
-    "Authorization": f"Bearer {get_access_token()}"
-}
 
 
-params = {
-    "per_page": 5,
-    "page": 1
-}
+
+def return_strava_data():
+    auth = get_access_token()
+    endpoint = f"{BASE_URL}/athlete/activities"
+
+    headers = {
+        "Authorization": f"Bearer {auth}"
+    }
+    params = {
+        "after": int(datetime.now() - timedelta(days=14).timestamp()),
+    }
+    response = requests.get(endpoint, headers=headers, params=params)
+    if not response.ok:
+        print(f"API returned {response.status_code}: {response.text}")
+        response.raise_for_status()
 
 
-response = requests.get(endpoint, headers=headers, params=params)
-
-
-if not response.ok:
-    print(f"API returned {response.status_code}: {response.text}")
-response.raise_for_status()
-
-
-activities = response.json()
-print(json.dumps(activities, indent=2))
+    activities = response.json()
+    return activities
