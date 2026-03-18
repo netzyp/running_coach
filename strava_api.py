@@ -32,7 +32,7 @@ def return_strava_data():
         "Authorization": f"Bearer {auth}"
     }
     params = {
-        "after": int((datetime.now() - timedelta(days=14))).timestamp(),
+        "after": int((datetime.now() - timedelta(days=14)).timestamp()),
     }
     response = requests.get(endpoint, headers=headers, params=params)
     if not response.ok:

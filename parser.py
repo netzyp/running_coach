@@ -19,7 +19,3 @@ def parsed_run_data(data):
                 'pace': (x['moving_time']/60) / (x['distance'] / 1000)
                 })
     return run_stats
-
-
-
-print(parsed_run_data(data=return_strava_data()))
