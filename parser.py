@@ -16,6 +16,6 @@ def parsed_run_data(data):
                 'average_speed': x['average_speed'],
                 'total_elevation': x['total_elevation_gain'],
                 'max_heartrate': x.get('max_heartrate'),
-                'pace': (x['moving_time']/60) / (x['distance'] / 1000)
+                'pace':(x['moving_time']/60) / (x['distance'] / 1000)
                 })
     return run_stats
